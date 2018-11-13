@@ -1,0 +1,43 @@
+.input_text {
+  font-size: 36;
+  font-family: basic-sans, sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  color: #9597A6
+}
+
+.input_field {
+  color: #C1C1C1;
+  border: 1px solid #949494;
+  border-radius: 10px;
+  box-sizing: border-box;
+  padding: 5px 5px;
+  text-align: center;
+  font-size: 24;
+  font-family: basic-sans, sans-serif;
+  font-weight: 200;
+  font-style: normal;
+}
+
+.button {
+  background: #545871;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  text-align: center;
+  font-size: 28;
+  font-family: basic-sans, sans-serif;
+  font-weight: 100;
+  font-style: normal;
+  padding: 7px 5px;
+  margin-top: 2px;
+}
+
+input {
+  color: transparent;
+  text-shadow: 0 0 0;
+}
+
+input:focus {
+  outline: none;
+}
