@@ -1,0 +1,14 @@
+{
+  "name": "rejsedatabase",
+  "version": "1.0.0",
+  "description": "Acces a travel company database",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "Malthe Poulsen",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "electron": "^3.0.9"
+  }
+}
