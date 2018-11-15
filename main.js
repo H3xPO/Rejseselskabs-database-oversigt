@@ -12,6 +12,9 @@ const password = '1234';
 
 let mainWindow;
 
+/*dbConnect();
+dbClose();*/
+
 // Listen for app to be ready
 app.on('ready', function () {
     // Create new window
@@ -136,3 +139,37 @@ if (process.env.NODE_END !== 'production') {
         ]
     })
 }
+/*
+
+const mysql = require('mysql');
+
+// Add the credentials to access your database
+const connection = mysql.createConnection({
+    host: 'localhost:3306',
+    user: 'root',
+    password: null, // or the original password : 'apaswword'
+    database: 'ourcodeworld-database'
+});
+
+function dbConnect() {
+    // connect to mysql
+    connection.connect(function (err) {
+        // in case of error
+        if (err) {
+            console.log(err.code);
+            console.log(err.fatal);
+            break;
+        }
+        else console.log('Connected to MySQL Database');
+    });
+
+}
+function dbClose() {
+    // Close the connection
+    connection.end(function () {
+        console.log('Disconnected form MySQL Database')
+        // The connection has been closed
+    });
+}
+
+*/
