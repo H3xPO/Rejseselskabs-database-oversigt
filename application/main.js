@@ -37,7 +37,7 @@ app.on('ready', function () {
     Menu.setApplicationMenu(mainMenu);
 })
 
-// Login handler
+// Login hanlder ( ipc call: 'login' )
 ipcMain.on('login',function(e, pw){
     if(pw == password){
         console.log('Acces Granted...')
@@ -50,6 +50,36 @@ ipcMain.on('login',function(e, pw){
     else{
         console.log('Acces Denied...')
     }
+})
+
+// Change URL: Main ( ipc call: 'main' )
+ipcMain.on('main', function(e) {
+    console.log('Directed to main.html')
+    mainWindow.loadURL(url.format({
+        pathname: path.join(__dirname, 'src/main.html'),
+        protocol: 'file:',
+        slashes: true
+    }))
+})
+
+// Change URL: Add Data ( ipc call: 'adddata' )
+ipcMain.on('adddata',function(e){
+    console.log('Directed to add.html')
+    mainWindow.loadURL(url.format({
+        pathname: path.join(__dirname, 'src/add.html'),
+        protocol: 'file:',
+        slashes: true
+    }))
+})
+
+// Change URL: Login ( ipc call: 'logout' )
+ipcMain.on('logout', function(e) {
+    console.log('Directed to login.html')
+    mainWindow.loadURL(url.format({
+        pathname: path.join(__dirname, 'src/login.html'),
+        protocol: 'file:',
+        slashes: true
+    }))
 })
 
 

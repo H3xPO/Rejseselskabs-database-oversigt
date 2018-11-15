@@ -1,9 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Document</title>
+    <title>Ude & Hjemme - Add Data</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 </head>
 <body>
-    
+    <div class="container">
+        <h2>Add Data</h2>
+        <form>
+            <button class="btn blue-grey waves-effect waves-light" type="submit">Cancel</button>
+        </form>
+    </div>
 </body>
+<script>
+    const electron = require('electron');
+    const { ipcRenderer } = electron;
+
+    const form = document.querySelector('form')
+    form.addEventListener('submit', directMain);
+
+    function directMain(e) {
+        e.preventDefault();
+        ipcRenderer.send('main')
+    }
+</script>
 </html>
