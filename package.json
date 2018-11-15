@@ -12,10 +12,10 @@
   "author": "Malthe Poulsen",
   "license": "MIT",
   "dependencies": {
-    "electron": "^3.0.9",
     "mysql": "^2.16.0"
   },
   "devDependencies": {
+    "electron": "^3.0.9",
     "electron-packager": "^12.2.0"
   }
 }
