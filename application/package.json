@@ -1,0 +1,20 @@
+{
+  "name": "traveldatabaseapp",
+  "version": "1.0.0",
+  "description": "An desktop application for, employes in UDE & HJEMME to show and acces their database.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=assets/icons/mac/icon.icns --prune=true --out=release-builds",
+    "package-win": "electron-packager . travel-company-database --overwrite --asar=true --platform=win32 --arch=ia32 --icon=assets/icons/win/icon.ico --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"UDE & HJEMMEtravel-company-database\"",
+    "package-linux": "electron-packager . travel-company-database --overwrite --asar=true --platform=linux --arch=x64 --icon=assets/icons/png/icon.png --prune=true --out=release-builds"
+  },
+  "author": "Malthe Poulsen",
+  "license": "MIT",
+  "dependencies": {
+    "electron": "^3.0.9"
+  },
+  "devDependencies": {
+    "electron-packager": "^12.2.0"
+  }
+}
