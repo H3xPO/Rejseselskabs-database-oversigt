@@ -7,7 +7,7 @@ const { app, BrowserWindow, Menu, ipcMain } = electron;
 // SET ENV
 //process.env.NODE_END = 'production';
 
-// Acces password
+// Access password
 const password = '1234';
 
 let mainWindow;
