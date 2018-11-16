@@ -3,23 +3,53 @@
 <head>
     <title>Ude & Hjemme - Database</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </head>
 <body>
     <div class="container">
         <h2>Overview</h2>
-        <form>
-            <button id="adddata" class="btn blue-grey waves-effect waves-light" type="submit">Add Data</button>
-            <button id="logout" class="btn blue-grey waves-effect waves-light" type="submit">Logout</button>
-        </form>
+
+        <table class="highlight">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Destination</th>
+                    <th>Hotel</th>
+                    <th>Catergory</th>
+                    <th>Activities</th>
+                    <th>Date</th>
+                    <th>Price</th>
+                    <th>Spaces</th>
+                </tr>
+            </thead>
+        
+            <tbody>
+                <tr id='target'></tr>
+            </tbody>
+        </table>
+        <br>
+        <button id="adddata" class="btn blue-grey waves-effect waves-light" type="submit">Add Data</button>
+        <button id="logout" class="btn blue-grey waves-effect waves-light" type="submit">Logout</button>
     </div>
 </body>
 <script>
     const electron = require('electron');
     const { ipcRenderer } = electron;
+    const tr = document.querySelector('#target');
 
-    const form = document.querySelector('form')
-    form.addEventListener('submit', directAdddata);
-    form.addEventListener('submit', directLogout);
+    ipcRenderer.send('table');
+
+    ipcRenderer.on('table', function(e, item){
+        const td = document.createElement('td');
+        const itemText = document.createTextNode(item);
+        td.appendChild(itemText);
+        tr.appendChild(td);
+    })
+
+
+
+    document.getElementById('adddata').addEventListener('click', directAdddata);
+    document.getElementById('logout').addEventListener('click', directLogout);
 
     function directAdddata(e){
         e.preventDefault();

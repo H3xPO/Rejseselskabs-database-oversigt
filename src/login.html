@@ -4,6 +4,7 @@
 <head>
     <title>Ude & Hjemme - Database Login</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </head>
 <body>       
     <div class="container">
@@ -27,9 +28,14 @@
 
     const form = document.querySelector('form')
     form.addEventListener('submit', pickPW);
+
+    ipcRenderer.on('login', function(e, arg){
+        document.getElementById('pw').value = '';
+        alert(arg);
+    })
     
     function pickPW(e){
-        e.preventDefault();
+        e.preventDefault();   
         const pw = document.querySelector('#pw').value;
         ipcRenderer.send('login', pw)
     }

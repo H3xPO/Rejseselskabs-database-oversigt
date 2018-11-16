@@ -3,21 +3,56 @@
 <head>
     <title>Ude & Hjemme - Add Data</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </head>
 <body>
     <div class="container">
         <h2>Add Data</h2>
         <form>
-            <button class="btn blue-grey waves-effect waves-light" type="submit">Cancel</button>
+        <div class="input-field col s6">
+            <input id="destination" type="text" class="validate">
+            <label for="destination">Destination</label>
+        </div>
+        <div class="input-field col s6">
+            <input id="hotel" type="text" class="validate">
+            <label for="hotel">Hotel</label>
+        </div>
+        <div class="input-field col s12">
+            <select>
+                <option value="" disabled selected>Choose your option</option>
+                <option value="1">Charter</option>
+                <option value="2">Beach & Pool</option>
+                <option value="3">Adventure</option>
+            </select>
+            <label>Category</label>
+        </div>
+        <div class="input-field col s12">
+            <select multiple>
+                <option value="" disabled selected>Choose your option</option>
+                <option value="1">Tourism</option>
+                <option value="2">Shopping</option>
+                <option value="3">Food</option>
+            </select>
+            <label>Activities</label>
+        </div>
+            <button class="btn blue-grey waves-effect waves-light" type="submit">Send Data</button>
         </form>
+        <br>
+        <button id="cancel" class="btn blue-grey waves-effect waves-light" type="submit">Cancel</button>
+        
     </div>
 </body>
 <script>
+    document.addEventListener('DOMContentLoaded', function () {
+            var elems = document.querySelectorAll('select');
+            var instances = M.FormSelect.init(elems, options);
+        });
+
+
     const electron = require('electron');
     const { ipcRenderer } = electron;
 
-    const form = document.querySelector('form')
-    form.addEventListener('submit', directMain);
+    document.getElementById('cancel').addEventListener('click', directMain);
 
     function directMain(e) {
         e.preventDefault();

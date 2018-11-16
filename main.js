@@ -49,8 +49,31 @@ ipcMain.on('login',function(e, pw){
     }
     else{
         console.log('Acces Denied...')
+        e.sender.send('login', 'Acces denied, try again!');        
     }
 })
+
+// Data from sqlite3
+/*const sqlite3 = require('sqlite3').verbose();
+const db = new sqlite3.Database('rejse.db');
+
+//const data = 'test';
+
+// Send data to main.html via IPC:table
+ipcMain.on('table',function(e){
+    console.log('Table Start modtaget');
+    db.serialize(function () {
+        db.each("SELECT * FROM rejser", function (err, row) {
+            console.log(row.idtravle + " " + row.hotel);
+            e.sender.send('table', row.location);
+        });
+    });
+    db.close();
+
+    //e.sender.send('table', data);
+})*/
+    
+
 
 // Change URL: Main ( ipc call: 'main' )
 ipcMain.on('main', function(e) {
