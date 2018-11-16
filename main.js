@@ -16,7 +16,9 @@ let mainWindow;
 app.on('ready', function () {
     // Create new window
     mainWindow = new BrowserWindow({
-        title: 'Acces Database'
+        title: 'Acces Database',
+        width: 800,
+        height: 800
     });
 
     // Load html into window
@@ -51,6 +53,12 @@ ipcMain.on('login',function(e, pw){
         console.log('Acces Denied...')
         e.sender.send('login', 'Acces denied, try again!');        
     }
+})
+
+// Form data grabber via ( ipc call: 'formdata' )
+ipcMain.on('formdata',function(e, formData){
+    const newData = formData
+    console.log(newData);
 })
 
 // Data from sqlite3

@@ -10,30 +10,32 @@
         <h2>Add Data</h2>
         <form>
         <div class="input-field col s6">
-            <input id="destination" type="text" class="validate">
+            <input id="destination" type="text" class="validate" required>
             <label for="destination">Destination</label>
         </div>
         <div class="input-field col s6">
-            <input id="hotel" type="text" class="validate">
+            <input id="hotel" type="text" class="validate" required>
             <label for="hotel">Hotel</label>
         </div>
-        <div class="input-field col s12">
-            <select>
-                <option value="" disabled selected>Choose your option</option>
-                <option value="1">Charter</option>
-                <option value="2">Beach & Pool</option>
-                <option value="3">Adventure</option>
-            </select>
-            <label>Category</label>
+        <div class="input-field col s6">
+            <input id="category" type="text" class="validate" required>
+            <label for="category">Category</label>
         </div>
-        <div class="input-field col s12">
-            <select multiple>
-                <option value="" disabled selected>Choose your option</option>
-                <option value="1">Tourism</option>
-                <option value="2">Shopping</option>
-                <option value="3">Food</option>
-            </select>
-            <label>Activities</label>
+        <div class="input-field col s6">
+            <input id="activities" type="text" class="validate" required>
+            <label for="activities">Activities</label>
+        </div>
+        <div class="input-field col s6">
+            <input id="dates" type="date" class="validate" required>
+            <label for="dates">Dates</label>
+        </div>
+        <div class="input-field col s6">
+            <input id="price" type="number" class="validate" required>
+            <label for="price">Price</label>
+        </div>
+        <div class="input-field col s6">
+            <input id="tickets" type="number" class="validate" required>
+            <label for="tickets">Spaces Left</label>
         </div>
             <button class="btn blue-grey waves-effect waves-light" type="submit">Send Data</button>
         </form>
@@ -52,7 +54,26 @@
     const electron = require('electron');
     const { ipcRenderer } = electron;
 
+    const form = document.querySelector('form')
+    form.addEventListener('submit', sendFormData);
+
+
     document.getElementById('cancel').addEventListener('click', directMain);
+
+    function sendFormData(e){
+        e.preventDefault();
+        const formData = [
+            document.querySelector('#destination').value,
+            document.querySelector('#hotel').value,
+            document.querySelector('#category').value,
+            document.querySelector('#activities').value,
+            document.querySelector('#dates').value,
+            document.querySelector('#price').value,
+            document.querySelector('#tickets').value
+        ];
+        ipcRenderer.send('formdata', formData);
+        ipcRenderer.send('main');
+    }
 
     function directMain(e) {
         e.preventDefault();
