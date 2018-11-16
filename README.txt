@@ -5,7 +5,3 @@ Node Modules:
     npm install electron-packager --save-dev
 3. Sqlite3
     npm install sqlite3 --save
-4. Electron Prebuilt
-    npm install electron-prebuilt --save
-5. Electron Rebuild
-    npm install electron-rebuild --save-dev
