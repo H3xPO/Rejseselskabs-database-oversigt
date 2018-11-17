@@ -61,25 +61,23 @@ ipcMain.on('formdata',function(e, formData){
     console.log(newData);
 })
 
-// Data from sqlite3
-/*const sqlite3 = require('sqlite3').verbose();
-const db = new sqlite3.Database('rejse.db');
-
-//const data = 'test';
 
 // Send data to main.html via IPC:table
 ipcMain.on('table',function(e){
+
+    // Data from sqlite3
+    const sqlite3 = require('sqlite3').verbose();
+    const db = new sqlite3.Database('./db/rejse.db');
+
     console.log('Table Start modtaget');
     db.serialize(function () {
         db.each("SELECT * FROM rejser", function (err, row) {
-            console.log(row.idtravle + " " + row.hotel);
+            console.log(row.idtravel + " " + row.hotel);
             e.sender.send('table', row.location);
         });
     });
     db.close();
-
-    //e.sender.send('table', data);
-})*/
+})
     
 
 

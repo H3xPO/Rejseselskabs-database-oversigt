@@ -13,11 +13,10 @@
   "author": "Malthe Poulsen",
   "license": "MIT",
   "dependencies": {
-    "electron-prebuilt": "^1.4.13",
+    "electron": "^3.0.9",
     "sqlite3": "^4.0.4"
   },
   "devDependencies": {
-    "electron": "^3.0.9",
     "electron-packager": "^12.2.0",
     "electron-rebuild": "^1.8.2"
   }
