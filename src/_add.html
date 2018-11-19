@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Ude & Hjemme - Add Data</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h2>Add Data</h2>
+        <form>
+        <div class="input-field col s6">
+            <input id="destination" type="text" class="validate" required>
+            <label for="destination">Destination</label>
+        </div>
+        <div class="input-field col s6">
+            <input id="hotel" type="text" class="validate" required>
+            <label for="hotel">Hotel</label>
+        </div>
+        <div class="input-field col s6">
+            <input id="category" type="text" class="validate" required>
+            <label for="category">Category</label>
+        </div>
+        <div class="input-field col s6">
+            <input id="activities" type="text" class="validate" required>
+            <label for="activities">Activities</label>
+        </div>
+        <div class="input-field col s6">
+            <input id="dates" type="date" class="validate" required>
+            <label for="dates">Dates</label>
+        </div>
+        <div class="input-field col s6">
+            <input id="price" type="number" class="validate" required>
+            <label for="price">Price</label>
+        </div>
+        <div class="input-field col s6">
+            <input id="tickets" type="number" class="validate" required>
+            <label for="tickets">Spaces Left</label>
+        </div>
+            <button class="btn blue-grey waves-effect waves-light" type="submit">Send Data</button>
+        </form>
+        <br>
+        <button id="cancel" class="btn blue-grey waves-effect waves-light" type="submit">Cancel</button>
+        
+    </div>
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+            var elems = document.querySelectorAll('select');
+            var instances = M.FormSelect.init(elems, options);
+        });
+
+
+    const electron = require('electron');
+    const { ipcRenderer } = electron;
+
+    const form = document.querySelector('form')
+    form.addEventListener('submit', sendFormData);
+
+
+    document.getElementById('cancel').addEventListener('click', directMain);
+
+    function sendFormData(e){
+        e.preventDefault();
+        /*const formData = [
+            document.querySelector('#destination').value,
+            document.querySelector('#hotel').value,
+            document.querySelector('#category').value,
+            document.querySelector('#activities').value,
+            document.querySelector('#dates').value,
+            document.querySelector('#price').value,
+            document.querySelector('#tickets').value
+        ];*/
+        const formData = '{ "location": "'+document.querySelector('#destination').value+'", "hotel": "'+document.querySelector('#hotel').value+'" }';
+        ipcRenderer.send('formdata', formData);
+        ipcRenderer.send('main');
+    }
+
+    function directMain(e) {
+        e.preventDefault();
+        ipcRenderer.send('main')
+    }
+</script>
+</html>
