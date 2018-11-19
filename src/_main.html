@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Ude & Hjemme - Database</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h2>Overview</h2>
+
+        <table class="highlight">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Destination</th>
+                    <th>Hotel</th>
+                    <th>Catergory</th>
+                    <th>Activities</th>
+                    <th>Date</th>
+                    <th>Price</th>
+                    <th>Spaces</th>
+                </tr>
+            </thead>
+        
+            <tbody id='target'>
+            </tbody>
+
+        </table>
+        <br>
+        <button id="adddata" class="btn blue-grey waves-effect waves-light" type="submit">Add Data</button>
+        <button id="logout" class="btn blue-grey waves-effect waves-light" type="submit">Close Database</button>
+    </div>
+</body>
+<script>
+    const electron = require('electron');
+    const { ipcRenderer } = electron;
+    const target = document.querySelector('#target');
+
+    ipcRenderer.send('table');
+
+    ipcRenderer.on('table', function(e, item){
+        var JSONobj = JSON.parse( item );      
+        var id = document.createTextNode(JSONobj.id);
+        var location = document.createTextNode(JSONobj.location);
+        var hotel = document.createTextNode(JSONobj.hotel);
+        var category = document.createTextNode(JSONobj.category);
+        var activities = document.createTextNode(JSONobj.activities);
+        var dates = document.createTextNode(JSONobj.dates);
+        var price = document.createTextNode(JSONobj.price);
+        var spaces = document.createTextNode(JSONobj.spaces);    
+
+        var tr = document.createElement('TR');
+        
+        var td1 = document.createElement('TD');
+        var td2 = document.createElement('TD');
+        var td3 = document.createElement('TD');                
+        var td4 = document.createElement('TD');                
+        var td5 = document.createElement('TD');        
+        var td6 = document.createElement('TD');                
+        var td7 = document.createElement('TD');
+        var td8 = document.createElement('TD');                
+
+        // Id
+        td1.appendChild(id);
+        tr.appendChild(td1);
+        // Destination
+        td2.appendChild(location);
+        tr.appendChild(td2);
+        // Hotel
+        td3.appendChild(hotel);
+        tr.appendChild(td3);
+        // Category
+        td4.appendChild(category);
+        tr.appendChild(td4);
+        // Activities
+        td5.appendChild(activities);
+        tr.appendChild(td5);
+        // Dates
+        td6.appendChild(dates);
+        tr.appendChild(td6);
+        // Price
+        td7.appendChild(price);
+        tr.appendChild(td7);
+        // Spaces
+        td8.appendChild(spaces);
+        tr.appendChild(td8);
+
+        target.appendChild(tr);
+    })
+
+    document.getElementById('adddata').addEventListener('click', directAdddata);
+    document.getElementById('logout').addEventListener('click', directLogout);
+
+    function directAdddata(e){
+        e.preventDefault();
+        ipcRenderer.send('adddata')
+    }
+    function directLogout(e){
+        e.preventDefault();
+        ipcRenderer.send('logout')
+    }
+
+</script>
+</html>
