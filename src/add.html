@@ -60,20 +60,22 @@
 
     document.getElementById('cancel').addEventListener('click', directMain);
 
-    function sendFormData(e){
-        e.preventDefault();
-        const formData = [
-            document.querySelector('#destination').value,
-            document.querySelector('#hotel').value,
-            document.querySelector('#category').value,
-            document.querySelector('#activities').value,
-            document.querySelector('#dates').value,
-            document.querySelector('#price').value,
-            document.querySelector('#tickets').value
-        ];
-        ipcRenderer.send('formdata', formData);
-        ipcRenderer.send('main');
-    }
+    function sendFormData(e) {
+            e.preventDefault();
+            const formData = [
+                document.querySelector('#destination').value,
+                document.querySelector('#hotel').value,
+                document.querySelector('#category').value,
+                document.querySelector('#activities').value,
+                document.querySelector('#dates').value,
+                document.querySelector('#price').value,
+                document.querySelector('#tickets').value
+            ];
+            
+            const formData = '{ "location": "' + document.querySelector('#destination').value + '", "hotel": "' + document.querySelector('#hotel').value + '" }';
+            ipcRenderer.send('formdata', formData);
+            ipcRenderer.send('main');
+        }
 
     function directMain(e) {
         e.preventDefault();

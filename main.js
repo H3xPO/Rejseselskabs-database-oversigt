@@ -56,29 +56,44 @@ ipcMain.on('login',function(e, pw){
 })
 
 // Form data grabber via ( ipc call: 'formdata' )
-ipcMain.on('formdata',function(e, formData){
-    const newData = formData
+ipcMain.on('formdata', function (e, formData) {
+    const newData = formData;
     console.log(newData);
+    var JSONobj = JSON.parse(newData);
+
+    // Write data to sqlite3
+    const sqlite3 = require('sqlite3').verbose();
+    const db = new sqlite3.Database('./db/rejse.db');
+
+    db.serialize(function () {
+        db.run("INSERT INTO rejser('hotel') VALUES ('" + JSONobj.hotel + "') ");
+    });
 })
 
-
 // Send data to main.html via IPC:table
-ipcMain.on('table',function(e){
+ipcMain.on('table', function (e) {
 
     // Data from sqlite3
     const sqlite3 = require('sqlite3').verbose();
     const db = new sqlite3.Database('./db/rejse.db');
 
+    var table = String;
+    JSONData = '';
     console.log('Table Start modtaget');
     db.serialize(function () {
+
+        // Test data
+        e.sender.send('table', '{ "id": "", "location": "Danmark", "hotel": "Marienlyst", "category": "1", "activities": "2", "dates": "2018-12-11", "price": "1.000,00", "spaces": "10" }');
+
+
         db.each("SELECT * FROM rejser", function (err, row) {
-            console.log(row.idtravel + " " + row.hotel);
-            e.sender.send('table', row.location);
+            JSONData = '{ "id": "' + row.idtravel + '", "location": "' + row.location + '", "hotel": "' + row.hotel + '", "category": "' + row.category + '", "activities": "' + row.activities + '", "dates": "' + row.dates + '", "price": "' + row.price + '", "spaces": "' + row.spaces + '" }';
+            console.log(JSONData);
+            e.sender.send('table', JSONData);
         });
     });
     db.close();
 })
-    
 
 
 // Change URL: Main ( ipc call: 'main' )
